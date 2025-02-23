@@ -16,7 +16,7 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            self.screen.fill(0,0,0)
+            self.screen.fill((0,0,0))
             pygame.display.flip()
 
         pygame.quit()
