@@ -1,5 +1,6 @@
 import pygame, sys
 from settings import *
+from level import Level
 
 class Game:
     def __init__(self):
@@ -9,6 +10,8 @@ class Game:
         self.running = True
         pygame.display.set_caption("Battle at Bear Bastion")
 
+        self.current_stage = Level()
+
     def run(self):
         while self.running:
             self.clock.tick(120)
@@ -16,12 +19,15 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            self.screen.fill((0,0,0))
             pygame.display.flip()
 
         pygame.quit()
         sys.exit()
+
+        self.current_stage.run()
         pygame.display.update()
 
-game = Game()
-game.run()
+
+if __name__ == "__main__":  
+    game = Game()
+    game.run()
