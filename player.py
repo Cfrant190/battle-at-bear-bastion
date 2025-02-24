@@ -6,7 +6,7 @@ class Bear(pygame.sprite.Sprite):
         super().__init__()
         self.x, self.y = x, y
         self.health = 100
-        self.gold = 0
+        self.gold = 0  # Initialize gold only once
         self.speed = 4
         self.sprite_sheet = sprite_sheet
         self.load_sprites()
@@ -15,6 +15,7 @@ class Bear(pygame.sprite.Sprite):
         self.vel_x, self.vel_y = 0, 0
         self.facing_right = True
         self.animation_frame = 0
+        self.movement = {"left": False, "right": False, "up": False, "down": False}  # Initialize movement dictionary
 
     def load_sprites(self):
         """Load different animations from the sprite sheet"""
@@ -23,6 +24,19 @@ class Bear(pygame.sprite.Sprite):
             "walk": [self.sprite_sheet.subsurface((32, 0, 32, 32))],  
             "attack": [self.sprite_sheet.subsurface((64, 0, 32, 32))],  
         }
+
+    def handle_input(self):
+        keys = pygame.key.get_pressed()
+        dx, dy = 0, 0
+        if keys[pygame.K_w]:
+            dy = -1
+        if keys[pygame.K_s]:
+            dy = 1
+        if keys[pygame.K_a]:
+            dx = -1
+        if keys[pygame.K_d]:
+            dx = 1
+        self.move(dx, dy)
 
     def handle_keydown(self, key):
         """Detect key press events and update movement."""

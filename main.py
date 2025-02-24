@@ -31,6 +31,8 @@ class Game:
                     self.player.handle_keydown(event.key)
                 elif event.type == pygame.KEYUP:
                     self.player.handle_keyup(event.key)
+                    
+            self.player.handle_input()
             
             # Update game objects
             self.updatable.update()
